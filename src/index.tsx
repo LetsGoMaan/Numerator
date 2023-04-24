@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Counter from "./components/Counter/Counter";
+import CounterWithCombinedSettings from "./components/CounterWithCombinedSettings/CounterWithCombinedSettings";
 import reportWebVitals from "./reportWebVitals";
 import {CounterWithSettings} from "./components/CounterWithSettings/CounterWithSettings";
 import {CounterWithRedux} from "./components/CounterWithRedux/CounterWithRedux";
@@ -13,13 +13,17 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <>
-        <Counter/>
-        <hr/>
-        <CounterWithSettings/>
-        <hr/>
-        <Provider store={store}>
-            <CounterWithRedux/>
-        </Provider>
+        <div className={"container"}>
+                <h3 className="title"> Counter with settings</h3>
+                <CounterWithCombinedSettings/>
+                <h3 className="title"> Counter with separated settings</h3>
+                <CounterWithSettings/>
+                <h3 className="title"> Counter on Redux</h3>
+                <Provider store={store}>
+                    <CounterWithRedux/>
+                </Provider>
+        </div>
+
     </>
 );
 

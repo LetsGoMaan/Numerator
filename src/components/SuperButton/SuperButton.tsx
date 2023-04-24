@@ -4,12 +4,13 @@ type SuperButtonPropsType = {
     onClick: () => void
     disabled: boolean
     name: string
+    className?: string
 }
 
 export const SuperButton = (props: SuperButtonPropsType) => {
     return (
         <>
-            <button onClick={props.onClick} disabled={props.disabled}>{props.name}</button>
+            <button className={props.className} onClick={props.onClick} disabled={props.disabled}>{props.name}</button>
         </>
     );
 };

@@ -1,64 +1,56 @@
-import React, {useState} from "react";
-import {CounterSettings} from "../CounterSettings/CounterSettings";
+import React from "react";
 import {SuperButton} from "../SuperButton/SuperButton";
+import styles from "../CounterWithCombinedSettings/CounterWithCombinedSettings.module.css"
+import commonStyles from '../../common/styles/CommonStyles.module.css'
+
+type CounterPropsType = {
+    counter: number
+    incCounter: (newCurrentValue: number) => void
+    resCounter: () => void
+    startValue: number
+    maxValue: number
+    editMode: boolean
+    error: boolean
+}
 
 
-const Counter = () => {
-    const [counter, setCounter] = useState(0)
-    const [editMode, setEditMode] = useState(false)
-    const [startValue, setStartValue] = useState(0)
-    const [maxValue, setMaxValue] = useState(3)
+export const Counter = (props: CounterPropsType) => {
 
-    const incCounter = () => {
-        setCounter(counter + 1)
+
+
+    const onClickIncHandler = () => {
+        props.incCounter(props.counter + 1)
     }
-    const resCounter = () => {
-        setCounter(0)
-    }
-    const changeEditMode = () => {
-        setEditMode(!editMode)
-        setCounter(startValue)
-    }
-    const changeMaxValue = (newMaxValue: number) => {
-        setMaxValue(newMaxValue)
-    }
-    const changeStartValue = (newStartValue: number) => {
-        setStartValue(newStartValue)
+    const onClickResHandler = () => {
+        props.resCounter()
     }
 
-    const error = startValue < 0 || maxValue <= startValue
-    const resDisabled = counter === startValue
-    const incDisabled = counter === maxValue
-
+    const error = props.startValue < 0 || props.maxValue <= props.startValue
+    const resDisabled = props.counter === props.startValue || props.error
+    const incDisabled = props.counter === props.maxValue || props.error
+    const dataClassName =  props.counter === props.maxValue ? styles.counterNumberMax : styles.counterNumberDefault
     return (
         <>
-            {editMode
-                ?
-                <CounterSettings
-                startValue={startValue}
-                maxValue={maxValue}
-                error={error}
-                changeStartValue={changeStartValue}
-                changeMaxValue={changeMaxValue}
-                changeEditMode={changeEditMode}/>
-                // <div>
-                //     <span>max value: <input type="number" value={maxValue} onChange={changeMaxValue}/></span>
-                //     <span>start value: <input type="number" value={startValue} onChange={changeStartValue}/></span>
-                //     <button disabled={error} onClick={changeEditMode}>Set</button>
-                // </div>
-                :
-                <div>
-                    {counter}
-                    <SuperButton name={'Inc'} disabled={incDisabled} onClick={incCounter}/>
-                    <SuperButton name={'Reset'} disabled={resDisabled} onClick={resCounter}/>
-                    <SuperButton name={'Set'} disabled={error} onClick={changeEditMode}/>
-                    {/*<button disabled={incDisabled} onClick={incCounter}>Inc</button>*/}
-                    {/*<button disabled={resDisabled} onClick={resCounter}>Reset</button>*/}
-                    {/*<button disabled={error} onClick={changeEditMode}>Set</button>*/}
+            <div className={styles.container} >
+                <div className={commonStyles.counter}>
+                    <div className={commonStyles.counterDisplay}>
+                        {error ? <div className={styles.textError}>Text error that Natasha wants</div> : props.editMode ?
+                            <div className={styles.text}>Set Value that Natasha wants</div> :
+                            <div className={dataClassName}>{props.counter}</div> }
+                    </div>
+                    <div className={commonStyles.buttons}>
+                        <SuperButton className={commonStyles.incButton} name={'Inc'} disabled={incDisabled} onClick={onClickIncHandler}/>
+                        <SuperButton className={commonStyles.resetButton} name={'Reset'} disabled={resDisabled} onClick={onClickResHandler}/>
+
+                        {/*<button disabled={incDisabled} onClick={incCounter}>Inc</button>*/}
+                        {/*<button disabled={resDisabled} onClick={resCounter}>Reset</button>*/}
+                        {/*<button disabled={error} onClick={changeEditMode}>Set</button>*/}
+                    </div>
+
                 </div>
-            }
+            </div>
         </>
     )
 }
 
-export default Counter;
+
