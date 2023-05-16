@@ -15,7 +15,7 @@ const CounterWithCombinedSettings = () => {
         setCounter(counter + 1)
     }
     const resCounter = () => {
-        setCounter(0)
+        setCounter(startValue)
     }
     const changeEditMode = () => {
         setEditMode(!editMode)

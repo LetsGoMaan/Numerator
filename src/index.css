@@ -20,10 +20,17 @@ code {
 }
 
 .container {
+  height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
+}
+
+.counterWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 h3 {
   color: white;

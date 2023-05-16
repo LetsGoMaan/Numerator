@@ -2,9 +2,9 @@
 type ActionsType = ReturnType<typeof setStartValue> | ReturnType<typeof setMaxValue> | ReturnType<typeof setCurrentValue>
 
 export type CounterStateType = {
-    currentValue: number;
-    maxValue: number;
-    startValue: number;
+    currentValue: number
+    maxValue: number
+    startValue: number
 }
 
 const initialState = {

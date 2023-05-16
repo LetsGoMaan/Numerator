@@ -14,14 +14,22 @@ const root = ReactDOM.createRoot(
 root.render(
     <>
         <div className={"container"}>
+            <div className={"counterWrapper"}>
                 <h3 className="title"> Counter with settings</h3>
                 <CounterWithCombinedSettings/>
+            </div>
+            <div className={"counterWrapper"}>
                 <h3 className="title"> Counter with separated settings</h3>
                 <CounterWithSettings/>
+            </div>
+            <div className={"counterWrapper"}>
                 <h3 className="title"> Counter on Redux</h3>
                 <Provider store={store}>
                     <CounterWithRedux/>
                 </Provider>
+            </div>
+
+
         </div>
 
     </>
